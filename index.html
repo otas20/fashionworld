@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FashionWorld</title>
+<title>FashionWorld Shop</title>
 
 <style>
 body {
@@ -13,20 +13,16 @@ body {
   color: white;
 }
 
+/* HEADER */
 header {
-  padding: 30px;
+  padding: 25px;
   text-align: center;
-  font-size: 34px;
+  font-size: 32px;
   font-weight: bold;
   background: linear-gradient(90deg, #ff4d6d, #6c63ff);
 }
 
-.subtitle {
-  text-align: center;
-  color: #bbb;
-  margin-top: 10px;
-}
-
+/* GRID */
 .container {
   max-width: 1100px;
   margin: auto;
@@ -37,14 +33,14 @@ header {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 18px;
-  margin-top: 25px;
 }
 
+/* CARD */
 .card {
   background: #151522;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  cursor: pointer;
   transition: 0.2s;
 }
 
@@ -58,29 +54,60 @@ header {
   object-fit: cover;
 }
 
-.content {
+.card-content {
   padding: 15px;
 }
 
-.badge {
-  display: inline-block;
-  padding: 5px 10px;
-  background: #ff4d6d;
-  border-radius: 8px;
-  font-size: 12px;
-  margin-bottom: 8px;
-}
-
 .price {
-  margin-top: 10px;
   color: #6c63ff;
   font-weight: bold;
 }
 
-.items {
-  color: #ccc;
-  font-size: 14px;
-  line-height: 1.5;
+/* MODAL (DETAIL) */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #151522;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+}
+
+.modal img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.buy {
+  margin-top: 10px;
+  padding: 10px;
+  background: #ff4d6d;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
 }
 </style>
 </head>
@@ -88,60 +115,97 @@ header {
 <body>
 
 <header>
-👕 FashionWorld
+👕 FashionWorld Shop
 </header>
-
-<div class="subtitle">
-Outfity do školy 🔥
-</div>
 
 <div class="container">
 
 <div class="grid">
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&q=60">
-    <div class="content">
-      <div class="badge">School</div>
+  <div class="card" onclick="openModal(0)">
+    <img src="https://picsum.photos/seed/outfit1/600/400">
+    <div class="card-content">
       <h3>Clean Street Fit</h3>
-      <div class="items">Hoodie • Jeans • Sneakers</div>
       <div class="price">≈ 2900 Kč</div>
     </div>
   </div>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd49?auto=format&fit=crop&w=800&q=60">
-    <div class="content">
-      <div class="badge">Cheap</div>
+  <div class="card" onclick="openModal(1)">
+    <img src="https://picsum.photos/seed/outfit2/600/400">
+    <div class="card-content">
       <h3>Budget Fit</h3>
-      <div class="items">Hoodie • Tee • Jeans</div>
       <div class="price">≈ 2100 Kč</div>
     </div>
   </div>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1520975867597-0a0b6f4f0a7a?auto=format&fit=crop&w=800&q=60">
-    <div class="content">
-      <div class="badge">Winter</div>
+  <div class="card" onclick="openModal(2)">
+    <img src="https://picsum.photos/seed/outfit3/600/400">
+    <div class="card-content">
       <h3>Winter Fit</h3>
-      <div class="items">Jacket • Hoodie • Jeans</div>
       <div class="price">≈ 4200 Kč</div>
     </div>
   </div>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1520975693410-7c5d5a2f1c1a?auto=format&fit=crop&w=800&q=60">
-    <div class="content">
-      <div class="badge">Casual</div>
-      <h3>Everyday Fit</h3>
-      <div class="items">Hoodie • Joggers • Sneakers</div>
-      <div class="price">≈ 1800 Kč</div>
-    </div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+
+    <img id="modalImg">
+
+    <h2 id="modalTitle"></h2>
+
+    <p id="modalItems"></p>
+
+    <h3 id="modalPrice"></h3>
+
+    <button class="buy">Koupit / Zobrazit podobné</button>
   </div>
-
 </div>
 
-</div>
+<script>
+
+const outfits = [
+  {
+    title: "Clean Street Fit",
+    items: "Hoodie • White Tee • Jeans • Sneakers",
+    price: "≈ 2900 Kč",
+    img: "https://picsum.photos/seed/outfit1/600/400"
+  },
+  {
+    title: "Budget Fit",
+    items: "Hoodie • Tee • Jeans • Sneakers",
+    price: "≈ 2100 Kč",
+    img: "https://picsum.photos/seed/outfit2/600/400"
+  },
+  {
+    title: "Winter Fit",
+    items: "Jacket • Hoodie • Jeans • Boots",
+    price: "≈ 4200 Kč",
+    img: "https://picsum.photos/seed/outfit3/600/400"
+  }
+];
+
+function openModal(index) {
+  const o = outfits[index];
+
+  document.getElementById("modalImg").src = o.img;
+  document.getElementById("modalTitle").innerText = o.title;
+  document.getElementById("modalItems").innerText = o.items;
+  document.getElementById("modalPrice").innerText = o.price;
+
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+</script>
 
 </body>
 </html>
