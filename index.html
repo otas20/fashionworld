@@ -1,27 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 <head>
-  <title>Školní outfity</title>
+  <meta charset="UTF-8">
+  <title>FashionWorld</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f0f14;
+      color: white;
+    }
+
+    header {
+      background: linear-gradient(90deg, #ff4d6d, #6c63ff);
+      padding: 25px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #1b1b24;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      color: #ff4d6d;
+    }
+
+    .outfit {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .item {
+      background: #2a2a38;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .price {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #6c63ff;
+    }
+
+    button {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>Školní outfity a tipy</h1>
+<header>
+  👕 FashionWorld
+</header>
 
-<h2>👕 Jak se obléct do školy</h2>
-<p>Do školy se nejlépe hodí jednoduché a pohodlné oblečení...</p>
+<div class="container">
 
-<h2>💡 Tipy</h2>
-<ul>
-  <li>Kombinuj jednoduché barvy</li>
-  <li>Základ je mikina + jeans + tenisky</li>
-  <li>Nekupuj zbytečně drahé věci</li>
-</ul>
+  <div class="card">
+    <h2>Outfity do školy</h2>
+    <p>Inspirace na jednoduché a levné outfity.</p>
+    <button onclick="generate()">Generovat outfit</button>
 
-<h2>🔥 Outfit do školy (2000 Kč)</h2>
-<p>Mikina: 600 Kč</p>
-<p>Tričko: 300 Kč</p>
-<p>Kalhoty: 700 Kč</p>
-<p>Boty: 1200 Kč</p>
+    <div id="result" style="margin-top:15px;"></div>
+  </div>
+
+</div>
+
+<script>
+const outfits = [
+  {
+    name: "Casual School Fit",
+    items: [
+      "Hoodie - 600 Kč",
+      "White T-shirt - 300 Kč",
+      "Jeans - 800 Kč",
+      "Sneakers - 1200 Kč"
+    ],
+    price: 2900
+  },
+  {
+    name: "Budget School Fit",
+    items: [
+      "Basic Hoodie - 400 Kč",
+      "Plain T-shirt - 200 Kč",
+      "Jeans - 600 Kč",
+      "Sneakers - 900 Kč"
+    ],
+    price: 2100
+  },
+  {
+    name: "Simple Clean Fit",
+    items: [
+      "Black Hoodie - 700 Kč",
+      "White Tee - 250 Kč",
+      "Black Jeans - 900 Kč",
+      "White Sneakers - 1100 Kč"
+    ],
+    price: 2950
+  }
+];
+
+function generate() {
+  const o = outfits[Math.floor(Math.random() * outfits.length)];
+
+  document.getElementById("result").innerHTML = `
+    <div class="card">
+      <h2>${o.name}</h2>
+
+      <div class="outfit">
+        ${o.items.map(i => `<div class="item">${i}</div>`).join("")}
+      </div>
+
+      <div class="price">Celkem: ${o.price} Kč</div>
+    </div>
+  `;
+}
+</script>
 
 </body>
 </html>
