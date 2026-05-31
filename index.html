@@ -9,65 +9,64 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #0b0b10;
+  background: #0a0a0f;
   color: white;
 }
 
 /* HEADER */
 header {
-  padding: 25px;
+  padding: 30px;
   text-align: center;
-  font-size: 30px;
+  font-size: 34px;
   font-weight: bold;
   background: linear-gradient(90deg, #ff4d6d, #6c63ff);
 }
 
+/* TEXT */
+.subtitle {
+  text-align: center;
+  color: #bbb;
+  margin-top: 10px;
+}
+
 /* CONTAINER */
 .container {
-  max-width: 900px;
+  max-width: 1100px;
   margin: auto;
   padding: 20px;
 }
 
-/* CATEGORY BUTTONS */
-.categories {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
 }
 
-.cat-btn {
-  background: #1b1b28;
-  padding: 10px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 1px solid #2c2c3a;
-}
-
-.cat-btn:hover {
-  background: #2a2a3a;
-}
-
-/* OUTFIT CARD */
+/* CARD */
 .card {
-  background: #161622;
+  background: #151522;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* IMAGE */
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* CONTENT */
+.content {
   padding: 15px;
-  margin: 15px 0;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-.price {
-  color: #6c63ff;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.items {
-  margin-top: 10px;
-  color: #ccc;
-  line-height: 1.6;
 }
 
 .badge {
@@ -76,7 +75,34 @@ header {
   background: #ff4d6d;
   border-radius: 8px;
   font-size: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+}
+
+.price {
+  margin-top: 10px;
+  color: #6c63ff;
+  font-weight: bold;
+}
+
+.items {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* BUTTON (future use) */
+button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
 }
 </style>
 </head>
@@ -87,87 +113,69 @@ header {
 👕 FashionWorld
 </header>
 
+<div class="subtitle">
+Outfity do školy, inspirace a levné kombinace
+</div>
+
 <div class="container">
 
-<p>Outfity do školy, inspirace a levné kombinace 👇</p>
+<div class="grid">
 
-<!-- CATEGORY BUTTONS -->
-<div class="categories">
-  <div class="cat-btn" onclick="filter('all')">Vše</div>
-  <div class="cat-btn" onclick="filter('school')">Do školy</div>
-  <div class="cat-btn" onclick="filter('cheap')">Levné</div>
-  <div class="cat-btn" onclick="filter('winter')">Zima</div>
-</div>
-
-<!-- OUTFITS -->
-<div id="outfits">
-
-  <div class="card" data-type="school">
-    <div class="badge">Do školy</div>
-    <h3>Clean School Fit</h3>
-    <div class="items">
-      Hoodie – 600 Kč<br>
-      White T-shirt – 300 Kč<br>
-      Jeans – 800 Kč<br>
-      Sneakers – 1200 Kč
+  <!-- 1 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&q=60">
+    <div class="content">
+      <div class="badge">Do školy</div>
+      <h3>Clean School Fit</h3>
+      <div class="items">
+        Hoodie • White Tee • Jeans • Sneakers
+      </div>
+      <div class="price">≈ 2900 Kč</div>
     </div>
-    <div class="price">Celkem: 2900 Kč</div>
   </div>
 
-  <div class="card" data-type="cheap">
-    <div class="badge">Levné</div>
-    <h3>Budget School Fit</h3>
-    <div class="items">
-      Basic hoodie – 400 Kč<br>
-      Plain T-shirt – 200 Kč<br>
-      Jeans – 600 Kč<br>
-      Sneakers – 900 Kč
+  <!-- 2 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1520975682031-2b7f4d5d2a3c?auto=format&fit=crop&w=800&q=60">
+    <div class="content">
+      <div class="badge">Levné</div>
+      <h3>Budget School Fit</h3>
+      <div class="items">
+        Hoodie • Tee • Jeans • Sneakers
+      </div>
+      <div class="price">≈ 2100 Kč</div>
     </div>
-    <div class="price">Celkem: 2100 Kč</div>
   </div>
 
-  <div class="card" data-type="school">
-    <div class="badge">Do školy</div>
-    <h3>Simple Street Fit</h3>
-    <div class="items">
-      Black hoodie – 700 Kč<br>
-      White tee – 250 Kč<br>
-      Black jeans – 900 Kč<br>
-      White sneakers – 1100 Kč
+  <!-- 3 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1520975867597-0a0b6f4f0a7a?auto=format&fit=crop&w=800&q=60">
+    <div class="content">
+      <div class="badge">Zima</div>
+      <h3>Winter School Fit</h3>
+      <div class="items">
+        Jacket • Hoodie • Jeans • Boots
+      </div>
+      <div class="price">≈ 4100 Kč</div>
     </div>
-    <div class="price">Celkem: 2950 Kč</div>
   </div>
 
-  <div class="card" data-type="winter">
-    <div class="badge">Zima</div>
-    <h3>Winter School Fit</h3>
-    <div class="items">
-      Winter jacket – 1200 Kč<br>
-      Hoodie – 600 Kč<br>
-      Jeans – 800 Kč<br>
-      Boots – 1500 Kč
+  <!-- 4 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1520975693410-7c5d5a2f1c1a?auto=format&fit=crop&w=800&q=60">
+    <div class="content">
+      <div class="badge">Casual</div>
+      <h3>Everyday Fit</h3>
+      <div class="items">
+        Hoodie • Joggers • Sneakers
+      </div>
+      <div class="price">≈ 1800 Kč</div>
     </div>
-    <div class="price">Celkem: 4100 Kč</div>
   </div>
 
 </div>
 
 </div>
-
-<script>
-function filter(type) {
-  const cards = document.querySelectorAll(".card");
-
-  cards.forEach(card => {
-    if (type === "all") {
-      card.style.display = "block";
-    } else {
-      card.style.display =
-        card.dataset.type === type ? "block" : "none";
-    }
-  });
-}
-</script>
 
 </body>
 </html>
